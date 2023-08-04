@@ -1,0 +1,71 @@
+<!-- TrieBased_AutocompleteApp/templates/autocomplete.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <title>Autocomplete</title>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">Trie-based Autocomplete</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6">
+                <form action="" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" placeholder="Enter your search query">
+                        <input type="number" class="form-control" name="num_suggestions" value="5" min="1" max="10" step="1">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if suggestions %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6">
+                <div class="list-group">
+                    <h4>Suggestions from the dataset:</h4>
+                    {% for suggestion in suggestions %}
+                        <a href="#" class="list-group-item list-group-item-action">{{ suggestion }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if remembered_suggestions %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6">
+                <div class="list-group">
+                    <h4>Maybe you are looking for this, but we don't have them:</h4>
+                
+                    {% for suggestion in remembered_suggestions %}
+                        <a href="#" class="list-group-item list-group-item-action">{{ suggestion }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        {% if not suggestions and not remembered_suggestions %}
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-6">
+                    <p class="text-center">No suggestions found.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    
+    <script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
